@@ -17,15 +17,19 @@
             font-family: 'Segoe UI', Verdana, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            text-align: center;
-            padding: 2%;
             transition: background-color 0.3s, color 0.3s;
         }
 
-        h1 {
+        header, main, footer {
+            text-align: center;
+            padding: 2% 5%;
+        }
+
+        header h1 {
             color: var(--primary-color);
-            font-size: 2.5em;
+            font-size: 2.8em;
             margin-bottom: 0.2em;
+            animation: fadeIn 1s ease-in;
         }
 
         h2 {
@@ -35,7 +39,7 @@
 
         p {
             font-size: 1.2em;
-            max-width: 600px;
+            max-width: 700px;
             margin: auto;
         }
 
@@ -61,31 +65,75 @@
             background-color: #005fa3;
         }
 
+        footer {
+            font-size: 0.9em;
+            margin-top: 2em;
+            color: #666;
+        }
+
         .dark-mode {
             --bg-color: #1e1e1e;
             --text-color: #f0f0f0;
             --primary-color: #00bfff;
             --accent-color: #66ccff;
         }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>Welcome to Our Website!</h1>
-    <hr>
-    <p>This is a simple, static website that we deploy by creating a pipeline on AWS CodePipeline.</p>
-    <h2 id="version">Website Version: Loading...</h2>
-    <h2>This is a change</h2>
-    <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    <header>
+        <h1>Welcome to Our Website!</h1>
+        <hr>
+    </header>
+
+    <main>
+        <p>This is a simple, static website that we deploy by creating a pipeline on AWS CodePipeline.</p>
+        <h2 id="version">Website Version: Loading...</h2>
+        <h2>This is a change</h2>
+        <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    </main>
+
+    <footer>
+        <p id="date"></p>
+        <p>&copy; 2025 Sample Website. All rights reserved.</p>
+    </footer>
 
     <script>
-        // Dynamically set version
+        // Set version dynamically
         const version = "3.0";
         document.getElementById("version").textContent = `Website Version: ${version}`;
 
-        // Dark mode toggle
+        // Display current date
+        const today = new Date();
+        document.getElementById("date").textContent = `Today's Date: ${today.toDateString()}`;
+
+        // Dark mode toggle with persistence
         function toggleDarkMode() {
             document.body.classList.toggle("dark-mode");
+            const isDark = document.body.classList.contains("dark-mode");
+            localStorage.setItem("darkMode", isDark ? "enabled" : "disabled");
         }
+
+        // Load dark mode preference
+        window.onload = () => {
+            if (localStorage.getItem("darkMode") === "enabled") {
+                document.body.classList.add("dark-mode");
+            }
+        };
     </script>
 </body>
 </html>
