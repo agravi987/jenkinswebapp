@@ -1,13 +1,91 @@
-<html>
-    <head>
-        <title>Sample Website</title>
-    </head>
-    <body style="text-align:center;font-family:Verdana;margin:1%;">
-        <h1 style="color:navy">Welcome to Our Website!</h1>
-        <hr>
-        <p>This is a simple, static website that we deploy by creating a pipeline on AWS CodePipeline.</p>
-        <h2>Website Version: 3.0</h2>
-        <h2>this is change </h2>
-        
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sample Website</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --primary-color: navy;
+            --bg-color: #f4f4f4;
+            --text-color: #333;
+            --accent-color: #0077cc;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            text-align: center;
+            padding: 2%;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5em;
+            margin-bottom: 0.2em;
+        }
+
+        h2 {
+            color: var(--accent-color);
+            margin: 0.5em 0;
+        }
+
+        p {
+            font-size: 1.2em;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        hr {
+            width: 60%;
+            margin: 1em auto;
+            border: 1px solid var(--accent-color);
+        }
+
+        button {
+            margin-top: 1em;
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #005fa3;
+        }
+
+        .dark-mode {
+            --bg-color: #1e1e1e;
+            --text-color: #f0f0f0;
+            --primary-color: #00bfff;
+            --accent-color: #66ccff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Our Website!</h1>
+    <hr>
+    <p>This is a simple, static website that we deploy by creating a pipeline on AWS CodePipeline.</p>
+    <h2 id="version">Website Version: Loading...</h2>
+    <h2>This is a change</h2>
+    <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+
+    <script>
+        // Dynamically set version
+        const version = "3.0";
+        document.getElementById("version").textContent = `Website Version: ${version}`;
+
+        // Dark mode toggle
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+        }
+    </script>
+</body>
 </html>
